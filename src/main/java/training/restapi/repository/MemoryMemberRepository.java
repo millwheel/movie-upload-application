@@ -2,11 +2,9 @@ package training.restapi.repository;
 
 import training.restapi.domain.Member;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
-public class memoryMemberRepository implements MemberRepository {
+public class MemoryMemberRepository implements MemberRepository {
 
     private static Map<Long, Member> store = new HashMap<>();
     private static long sequence = 0L;
@@ -27,4 +25,7 @@ public class memoryMemberRepository implements MemberRepository {
         return store.values().stream().filter(member -> member.getName().equals(name)).findAny();
     }
 
+    public void clearStore() {
+        store.clear();
+    }
 }
