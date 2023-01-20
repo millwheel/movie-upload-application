@@ -24,4 +24,8 @@ public class MemoryVideoRepository implements VideoRepository{
     public List<Video> findAll() {
         return new ArrayList<>(store.values());
     }
+
+    public void clearStore() {
+        store.clear();
+    }
 }
