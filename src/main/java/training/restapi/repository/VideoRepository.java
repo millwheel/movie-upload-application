@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface VideoRepository {
-    void save(Video video);
+    void enroll(Video video);
     Optional<Video> findById(Long id);
     List<Video> findAll();
 }

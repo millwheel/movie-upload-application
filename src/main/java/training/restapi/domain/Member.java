@@ -9,6 +9,5 @@ public class Member {
     private String name;
     private String username;
     private String password;
-    private String passwordConfirm;
     private Boolean membership;
 }

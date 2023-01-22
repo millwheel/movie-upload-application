@@ -10,7 +10,7 @@ public class MemoryVideoRepository implements VideoRepository{
     private static Long sequence = 0L;
 
     @Override
-    public void save(Video video) {
+    public void enroll(Video video) {
         video.setId(sequence++);
         store.put(video.getId(), video);
     }
