@@ -13,9 +13,6 @@ public class VideoService {
         this.videoRepository = videoRepository;
     }
 
-    public enroll(){
-
-    }
 
 
 }

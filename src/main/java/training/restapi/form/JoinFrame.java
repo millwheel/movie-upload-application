@@ -5,7 +5,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class LoginForm {
-    private String username;
+public class JoinFrame {
+    private String name;
+    private String email;
     private String password;
+    private String passwordConfirm;
 }
