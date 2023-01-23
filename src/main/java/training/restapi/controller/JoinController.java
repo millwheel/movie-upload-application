@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import training.restapi.domain.Member;
 import training.restapi.form.JoinFrame;
 import training.restapi.service.MemberService;
 
@@ -33,6 +34,11 @@ public class JoinController {
     public JoinFrame join(@RequestBody JoinFrame data){
         log.info("name={}, email={}, password={}, password confirm={}",
                 data.getName(), data.getEmail(), data.getPassword(), data.getPasswordConfirm());
+        Member member = new Member();
+        member.setName(data.getName());
+        member.setEmail(data.getEmail());
+        member.setPassword(data.getPassword());
+        memberService.join(member);
         return data;
     }
 }
