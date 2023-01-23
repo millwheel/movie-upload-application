@@ -22,7 +22,7 @@ public class LoginController {
     @GetMapping("/login")
     public LoginFrame loginForm(){
         LoginFrame loginFrame = new LoginFrame();
-        loginFrame.setUsername("Input your user email");
+        loginFrame.setEmail("Input your user email");
         loginFrame.setPassword("password");
         return loginFrame;
     }
@@ -30,7 +30,7 @@ public class LoginController {
     @PostMapping("/login")
     public LoginFrame login(@RequestBody LoginFrame data) {
         log.info("email={}, password={}",
-                data.getUsername(), data.getPassword());
+                data.getEmail(), data.getPassword());
         return data;
     }
 }
