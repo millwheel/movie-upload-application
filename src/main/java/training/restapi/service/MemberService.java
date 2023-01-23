@@ -24,11 +24,15 @@ public class MemberService {
     }
 
     public void validatedDuplicateMember(Member member){
-        memberRepository.findByName(member.getName())
+        memberRepository.findByEmail(member.getName())
                 .ifPresent(m -> {throw new IllegalArgumentException("이미 존재하는 회원입니다.");});
     }
 
-    public Optional<Member> findMember(Long memberId){
-        return memberRepository.findById(memberId);
+    public boolean login(String email, String password){
+        Optional<Member> user = memberRepository.findByEmail(email);
+        if(user.isPresent()){
+            return true;
+        }
+        return false;
     }
 }
