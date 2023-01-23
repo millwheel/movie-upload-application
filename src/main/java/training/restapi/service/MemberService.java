@@ -30,9 +30,13 @@ public class MemberService {
 
     public boolean login(String email, String password){
         Optional<Member> user = memberRepository.findByEmail(email);
-        if(user.isPresent()){
-            return true;
+        if(!user.isPresent()) {
+            return false;
         }
-        return false;
+
+        if(memberRepository.matchPassword(user) != password){
+            return false;
+        }
+        return true;
     }
 }
