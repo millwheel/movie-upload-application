@@ -1,9 +1,11 @@
 package training.restapi.repository;
 
+import org.springframework.stereotype.Repository;
 import training.restapi.domain.Video;
 
 import java.util.*;
 
+@Repository
 public class MemoryVideoRepository implements VideoRepository{
 
     private static Map<Long, Video> store = new HashMap();

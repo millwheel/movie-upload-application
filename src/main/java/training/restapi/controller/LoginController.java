@@ -23,7 +23,7 @@ public class LoginController {
     public LoginFrame loginForm(){
         LoginFrame loginFrame = new LoginFrame();
         loginFrame.setEmail("Input your user email");
-        loginFrame.setPassword("password");
+        loginFrame.setPassword("your password");
         return loginFrame;
     }
 
