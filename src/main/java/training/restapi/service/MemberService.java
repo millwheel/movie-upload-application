@@ -34,9 +34,9 @@ public class MemberService {
             return false;
         }
 
-        if(memberRepository.matchPassword(user) != password){
-            return false;
-        }
+//        if(memberRepository.matchPassword(user) != password){
+//            return false;
+//        }
         return true;
     }
 }

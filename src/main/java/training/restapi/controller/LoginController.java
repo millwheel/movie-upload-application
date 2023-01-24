@@ -1,5 +1,7 @@
 package training.restapi.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,8 +12,10 @@ import training.restapi.domain.Member;
 import training.restapi.form.LoginFrame;
 import training.restapi.service.MemberService;
 
+import java.io.IOException;
+
 @Slf4j
-@Controller
+@RestController
 public class LoginController {
 
     private final MemberService memberService;
@@ -23,7 +27,6 @@ public class LoginController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/login")
-    @ResponseBody
     public LoginFrame loginForm(){
         LoginFrame loginFrame = new LoginFrame();
         loginFrame.setEmail("Input your user email");
@@ -32,17 +35,17 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginFrame data, RedirectAttributes redirectAttributes) {
+    public void login(@RequestBody LoginFrame data, HttpServletResponse response) throws IOException {
         log.info("email={}, password={}",
                 data.getEmail(), data.getPassword());
         if(!memberService.login(data.getEmail(), data.getPassword())){
-            return "redirect:/login/error";
+            response.sendRedirect("/login");
+        }else{
+            response.sendRedirect("/");
         }
-        return "redirect:/";
     }
 
     @GetMapping("/login/error")
-    @ResponseBody
     public String loginError(){
         return "invalid id/password. check if it is correct.";
     }
