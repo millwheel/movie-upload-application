@@ -8,5 +8,4 @@ public interface MemberRepository {
     void make(Member member);
     Optional<Member> findById(Long id);
     Optional<Member> findByEmail(String email);
-    String matchPassword(Member member);
 }

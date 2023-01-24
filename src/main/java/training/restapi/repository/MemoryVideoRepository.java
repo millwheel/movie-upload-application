@@ -23,6 +23,16 @@ public class MemoryVideoRepository implements VideoRepository{
     }
 
     @Override
+    public Optional<Video> findByName(String name) {
+        return store.values().stream().filter(video -> video.getName().equals(name)).findAny();
+    }
+
+    @Override
+    public Optional<Video> findByDate(String date) {
+        return Optional.empty();
+    }
+
+    @Override
     public List<Video> findAll() {
         return new ArrayList<>(store.values());
     }

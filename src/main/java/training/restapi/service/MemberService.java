@@ -1,5 +1,6 @@
 package training.restapi.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import training.restapi.domain.Member;
@@ -7,6 +8,7 @@ import training.restapi.repository.MemberRepository;
 
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class MemberService {
 
@@ -30,13 +32,16 @@ public class MemberService {
 
     public boolean login(String email, String password){
         Optional<Member> user = memberRepository.findByEmail(email);
-        if(!user.isPresent()) {
+        if(user.isEmpty()) {
+            log.info("such email address doesn't exist");
             return false;
         }
-
-//        if(memberRepository.matchPassword(user) != password){
-//            return false;
-//        }
+        Member member = user.get();
+        if(!member.getPassword().equals(password)){
+            log.info("password wrong");
+            return false;
+        }
+        log.info("login success");
         return true;
     }
 }

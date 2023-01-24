@@ -27,11 +27,6 @@ public class MemoryMemberRepository implements MemberRepository {
         return store.values().stream().filter(member -> member.getEmail().equals(email)).findAny();
     }
 
-    @Override
-    public String matchPassword(Member member) {
-        String password = member.getPassword();
-        return password;
-    }
 
     public void clearStore() {
         store.clear();
