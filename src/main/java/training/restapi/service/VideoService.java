@@ -2,7 +2,10 @@ package training.restapi.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import training.restapi.domain.Video;
 import training.restapi.repository.VideoRepository;
+
+import java.util.stream.Stream;
 
 @Service
 public class VideoService {
@@ -13,6 +16,9 @@ public class VideoService {
         this.videoRepository = videoRepository;
     }
 
-
+    public Object[] findVideoForUser(String username){
+        Object[] videoList = videoRepository.findByUsername(username).toArray();
+        return videoList;
+    }
 
 }

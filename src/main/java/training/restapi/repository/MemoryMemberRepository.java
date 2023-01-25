@@ -27,7 +27,6 @@ public class MemoryMemberRepository implements MemberRepository {
         return store.values().stream().filter(member -> member.getEmail().equals(email)).findAny();
     }
 
-
     public void clearStore() {
         store.clear();
     }

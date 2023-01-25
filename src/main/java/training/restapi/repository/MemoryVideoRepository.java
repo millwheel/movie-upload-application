@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import training.restapi.domain.Video;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 @Repository
 public class MemoryVideoRepository implements VideoRepository{
@@ -23,18 +24,8 @@ public class MemoryVideoRepository implements VideoRepository{
     }
 
     @Override
-    public Optional<Video> findByName(String name) {
-        return store.values().stream().filter(video -> video.getName().equals(name)).findAny();
-    }
-
-    @Override
-    public Optional<Video> findByDate(String date) {
-        return Optional.empty();
-    }
-
-    @Override
-    public List<Video> findAll() {
-        return new ArrayList<>(store.values());
+    public Stream<Video> findByUsername(String userName) {
+        return store.values().stream().filter(video -> video.getUserName().equals(userName));
     }
 
     public void clearStore() {
