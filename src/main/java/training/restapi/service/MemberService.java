@@ -29,18 +29,17 @@ public class MemberService {
                 .ifPresent(m -> {throw new IllegalArgumentException("이미 존재하는 회원입니다.");});
     }
 
-    public boolean login(String email, String password){
+    public Member login(String email, String password){
         Optional<Member> user = memberRepository.findByEmail(email);
         if(user.isEmpty()) {
             log.info("such email address doesn't exist");
-            return false;
+            return null;
         }
         Member member = user.get();
         if(!member.getPassword().equals(password)){
             log.info("password wrong");
-            return false;
+            return null;
         }
-        log.info("login success");
-        return true;
+        return member;
     }
 }

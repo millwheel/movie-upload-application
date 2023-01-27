@@ -21,7 +21,7 @@ public class VideoController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/video-list")
     public String videoList(){
-        Object[] videoList = videoService.findVideoForUser(username);
+
         return "video";
     }
 

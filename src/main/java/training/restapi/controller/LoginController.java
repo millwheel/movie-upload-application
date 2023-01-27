@@ -1,11 +1,13 @@
 package training.restapi.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import training.restapi.form.LoginFrame;
+import training.restapi.domain.Member;
+import training.restapi.form.LoginForm;
 import training.restapi.service.MemberService;
 
 import java.io.IOException;
@@ -21,24 +23,34 @@ public class LoginController {
         this.memberService = memberService;
     }
 
-    @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/login")
-    public LoginFrame loginForm(){
-        LoginFrame loginFrame = new LoginFrame();
-        loginFrame.setEmail("Input your user email");
-        loginFrame.setPassword("your password");
-        return loginFrame;
+    @PostMapping("/login")
+    public void login(
+            @RequestBody LoginForm data,
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) throws IOException {
+        log.info("email={}, password={}", data.getEmail(), data.getPassword());
+
+        Member loginMember = memberService.login(data.getEmail(), data.getPassword());
+
+        if(loginMember == null){
+            response.sendRedirect("/login");
+        }
+
+        HttpSession session = request.getSession();
+        session.setAttribute("loginMember", loginMember);
+
+        log.info("login success");
+        response.sendRedirect("/");
     }
 
-    @PostMapping("/login")
-    public void login(@RequestBody LoginFrame data, HttpServletResponse response) throws IOException {
-        log.info("email={}, password={}",
-                data.getEmail(), data.getPassword());
-        if(!memberService.login(data.getEmail(), data.getPassword())){
-            response.sendRedirect("/login");
-        }else{
-            response.sendRedirect("/");
-        }
+    @PostMapping("/logout")
+    public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession(false);
+        session.invalidate();
+
+        log.info("logout success");
+        response.sendRedirect("/");
     }
 
 }
