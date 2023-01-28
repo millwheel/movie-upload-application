@@ -24,12 +24,10 @@ public class JoinController {
         log.info("name={}, email={}, password={}, password confirm={}",
                 data.getName(), data.getEmail(), data.getPassword(), data.getPasswordConfirm());
 
-        if(!data.getPassword().equals(data.getPasswordConfirm())){
-            log.info("password confirm doesn't match");
-            return data;
+        boolean result = memberService.join(data);
+        if (!result){
+            return null;
         }
-        memberService.join(data);
-
         return data;
     }
 }
