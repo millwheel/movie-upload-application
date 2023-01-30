@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +26,14 @@ public class LoginController {
         this.memberService = memberService;
     }
 
+    @GetMapping("/login")
+    public LoginForm come(){
+        LoginForm loginForm = new LoginForm();
+        loginForm.setEmail("your email");
+        loginForm.setPassword("your password");
+        return loginForm;
+    }
+
     @PostMapping("/login")
     public void login(
             @RequestBody LoginForm data,
@@ -36,13 +45,14 @@ public class LoginController {
         Member loginMember = memberService.login(data.getEmail(), data.getPassword());
 
         if(loginMember == null){
+            log.info("login fail");
             response.sendRedirect("/login");
+            return;
         }
 
+        log.info("login success");
         HttpSession session = request.getSession();
         session.setAttribute("loginMember", loginMember);
-
-        log.info("login success");
         response.sendRedirect("/");
     }
 
