@@ -1,21 +1,13 @@
 package training.restapi.domain;
 
-import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@Entity
+@Getter @Setter
 public class Member {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String email;
     private String password;
     private Boolean membership;
-
-    public Member(){
-
-    }
 }
