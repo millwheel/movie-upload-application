@@ -22,20 +22,15 @@ public class MemberService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public Boolean join(JoinForm joinData){
+    public String join(JoinForm joinData){
         Member member = new Member();
         memberRepository.findByEmail(joinData.getName())
                 .ifPresent(m -> {throw new IllegalArgumentException("이미 존재하는 회원입니다.");});
         member.setName(joinData.getName());
         member.setEmail(joinData.getEmail());
-        if(!joinData.getPassword().equals(joinData.getPasswordConfirm())){
-            log.info("password confirm doesn't match");
-            return false;
-        }
         member.setPassword(passwordEncoder.encode(joinData.getPassword()));
-        log.info("password hashed={}", member.getPassword());
         memberRepository.make(member);
-        return true;
+        return member.getPassword();
     }
 
     public Member login(String email, String password){
@@ -45,8 +40,8 @@ public class MemberService {
             return null;
         }
         Member member = user.get();
-        if(!passwordEncoder.matches(password, member.getPassword())){
-            log.info("wrong password.");
+        if(!member.getPassword().equals(password)){
+            log.info("password wrong");
             return null;
         }
         return member;
