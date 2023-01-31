@@ -1,5 +1,6 @@
 package training.restapi.repository;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import training.restapi.domain.Member;
 
