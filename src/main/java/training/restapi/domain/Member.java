@@ -24,4 +24,5 @@ public class Member {
         this.password = password;
         this.membership = membership;
     }
+
 }
