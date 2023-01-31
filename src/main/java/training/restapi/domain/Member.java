@@ -4,10 +4,10 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
-@Entity
+//@Entity
 public class Member {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -15,7 +15,14 @@ public class Member {
     private String password;
     private Boolean membership;
 
-    public Member(){
-
-    }
+//    public Member(){
+//
+//    }
+//
+//    public Member(String name, String email, String password, Boolean membership) {
+//        this.name = name;
+//        this.email = email;
+//        this.password = password;
+//        this.membership = membership;
+//    }
 }
