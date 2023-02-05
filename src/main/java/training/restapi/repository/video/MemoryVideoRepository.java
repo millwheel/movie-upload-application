@@ -2,7 +2,6 @@ package training.restapi.repository.video;
 
 import org.springframework.stereotype.Repository;
 import training.restapi.domain.Video;
-import training.restapi.repository.video.VideoRepository;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -25,8 +24,8 @@ public class MemoryVideoRepository implements VideoRepository {
     }
 
     @Override
-    public Stream<Video> findByUsername(String userName) {
-        return store.values().stream().filter(video -> video.getUserName().equals(userName));
+    public List<Video> findByUsername(String userName) {
+        return store.values().stream().filter(video -> video.getUserName().equals(userName)).toList();
     }
 
     public void clearStore() {
