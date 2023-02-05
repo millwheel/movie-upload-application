@@ -18,11 +18,4 @@ public class Member {
     public Member() {
     }
 
-    public Member(String name, String email, String password, Boolean membership) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.membership = membership;
-    }
-
 }
