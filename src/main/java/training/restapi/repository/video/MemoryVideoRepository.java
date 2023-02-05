@@ -1,13 +1,14 @@
-package training.restapi.repository;
+package training.restapi.repository.video;
 
 import org.springframework.stereotype.Repository;
 import training.restapi.domain.Video;
+import training.restapi.repository.video.VideoRepository;
 
 import java.util.*;
 import java.util.stream.Stream;
 
 @Repository
-public class MemoryVideoRepository implements VideoRepository{
+public class MemoryVideoRepository implements VideoRepository {
 
     private static Map<Long, Video> store = new HashMap();
     private static Long sequence = 0L;

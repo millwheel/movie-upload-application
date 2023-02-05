@@ -1,10 +1,9 @@
-package training.restapi.repository;
+package training.restapi.repository.member;
 
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import training.restapi.domain.Member;
 

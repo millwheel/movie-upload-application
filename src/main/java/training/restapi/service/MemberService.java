@@ -6,7 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import training.restapi.domain.Member;
 import training.restapi.form.JoinForm;
-import training.restapi.repository.MemberRepository;
+import training.restapi.repository.member.MemberRepository;
 import java.util.Optional;
 
 @Slf4j

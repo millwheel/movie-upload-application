@@ -2,10 +2,7 @@ package training.restapi.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import training.restapi.domain.Video;
-import training.restapi.repository.VideoRepository;
-
-import java.util.stream.Stream;
+import training.restapi.repository.video.VideoRepository;
 
 @Service
 public class VideoService {

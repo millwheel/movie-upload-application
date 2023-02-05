@@ -1,4 +1,4 @@
-package training.restapi.repository;
+package training.restapi.repository.video;
 
 import training.restapi.domain.Member;
 import training.restapi.domain.Video;

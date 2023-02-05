@@ -1,10 +1,12 @@
-package training.restapi.repository;
+package training.restapi.repository.member;
 
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import training.restapi.domain.Member;
+import training.restapi.repository.member.MemberRepository;
+import training.restapi.repository.member.SpringDataJpaMemberRepository;
 
 import java.util.Optional;
 
@@ -12,11 +14,11 @@ import java.util.Optional;
 @Repository
 @Primary
 @Transactional
-public class SpringDataJpaMemberRepository implements MemberRepository {
+public class SpringDataMemberRepository implements MemberRepository {
 
-    private final SpringDataJpaRepository repository;
+    private final SpringDataJpaMemberRepository repository;
 
-    public SpringDataJpaMemberRepository(SpringDataJpaRepository springDataJpaRepository) {
+    public SpringDataMemberRepository(SpringDataJpaMemberRepository springDataJpaRepository) {
         this.repository = springDataJpaRepository;
     }
 

@@ -1,8 +1,8 @@
-package training.restapi.repository;
+package training.restapi.repository.member;
 
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import training.restapi.domain.Member;
+import training.restapi.repository.member.MemberRepository;
 
 import java.util.*;
 
