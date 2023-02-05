@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public interface VideoRepository {
-    void enroll(Video video);
+    void make(Video video);
     Optional<Video> findById(Long id);
     Stream<Video> findByUsername(String userName);
 }
