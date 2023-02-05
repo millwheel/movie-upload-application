@@ -23,7 +23,7 @@ public class SpringDataVideoRepository implements VideoRepository {
     }
 
     @Override
-    public void make(Video video) {
+    public void save(Video video) {
         repository.save(video);
     }
 
@@ -33,7 +33,7 @@ public class SpringDataVideoRepository implements VideoRepository {
     }
 
     @Override
-    public List<Video> findByUsername(String userName) {
-        return repository.findByUsername(userName);
+    public List<Video> findByUsername(String username) {
+        return repository.findByUsername(username);
     }
 }

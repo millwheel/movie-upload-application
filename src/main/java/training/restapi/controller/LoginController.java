@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import training.restapi.Const;
 import training.restapi.domain.Member;
 import training.restapi.form.LoginForm;
 import training.restapi.service.MemberService;
@@ -52,7 +53,7 @@ public class LoginController {
 
         log.info("login success");
         HttpSession session = request.getSession();
-        session.setAttribute("loginMember", loginMember);
+        session.setAttribute(Const.LOGIN_MEMBER, loginMember);
         response.sendRedirect("/");
     }
 

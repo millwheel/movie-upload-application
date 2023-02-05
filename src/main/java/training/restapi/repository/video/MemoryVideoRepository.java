@@ -13,7 +13,7 @@ public class MemoryVideoRepository implements VideoRepository {
     private static Long sequence = 0L;
 
     @Override
-    public void make(Video video) {
+    public void save(Video video) {
         video.setId(sequence++);
         store.put(video.getId(), video);
     }
@@ -25,7 +25,7 @@ public class MemoryVideoRepository implements VideoRepository {
 
     @Override
     public List<Video> findByUsername(String userName) {
-        return store.values().stream().filter(video -> video.getUserName().equals(userName)).toList();
+        return store.values().stream().filter(video -> video.getUsername().equals(userName)).toList();
     }
 
     public void clearStore() {

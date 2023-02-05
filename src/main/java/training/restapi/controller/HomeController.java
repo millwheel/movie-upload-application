@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import training.restapi.Const;
 import training.restapi.domain.Member;
 
 @Slf4j
@@ -18,7 +19,7 @@ public class HomeController {
             log.info("no session");
             return "welcome";
         }
-        Member loginMember = (Member)session.getAttribute("loginMember");
+        Member loginMember = (Member)session.getAttribute(Const.LOGIN_MEMBER);
         if(loginMember == null){
             log.info("no user info");
             return "welcome";

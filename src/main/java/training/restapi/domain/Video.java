@@ -3,6 +3,8 @@ package training.restapi.domain;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 @Entity
 public class Video {
@@ -10,8 +12,8 @@ public class Video {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String date;
-    private String userName;
+    private LocalDateTime date;
+    private String username;
 
     public Video() {
     }
