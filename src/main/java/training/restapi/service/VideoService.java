@@ -7,6 +7,7 @@ import training.restapi.repository.video.VideoRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VideoService {
@@ -15,6 +16,10 @@ public class VideoService {
     @Autowired
     public VideoService(VideoRepository videoRepository) {
         this.videoRepository = videoRepository;
+    }
+
+    public Optional<Video> findVideoById(Long id){
+        return videoRepository.findById(id);
     }
 
     public List<Video> findVideos(String username){
