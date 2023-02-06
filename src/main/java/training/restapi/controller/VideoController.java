@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Slf4j
@@ -63,8 +64,12 @@ public class VideoController {
         Member loginMember = (Member)session.getAttribute(Const.LOGIN_MEMBER);
 
         if (!file.isEmpty()) {
-            videoService.saveVideo(videoForm.getName(), loginMember.getName());
-            String fullPath = fileDir + videoForm.getName();
+            String originalFilename = file.getOriginalFilename();
+            int pos = Objects.requireNonNull(originalFilename).lastIndexOf(".");
+            String ext = originalFilename.substring(pos + 1);
+            String saveName = videoForm.getName() + "." + ext;
+            videoService.saveVideo(saveName, loginMember.getName());
+            String fullPath = fileDir + saveName;
             file.transferTo(new File(fullPath));
         }
 
