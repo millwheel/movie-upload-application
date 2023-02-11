@@ -28,6 +28,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Slf4j
+@RequestMapping("/video")
 @RestController
 public class VideoController {
 
@@ -43,7 +44,7 @@ public class VideoController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/video/list")
+    @GetMapping("/list")
     public List<Video> videoList(HttpServletRequest request){
         HttpSession session = request.getSession();
         Member loginMember = (Member)session.getAttribute(Const.LOGIN_MEMBER);
@@ -54,10 +55,10 @@ public class VideoController {
         return videoList;
     }
 
-    @PostMapping("/video/upload")
+    @PostMapping("/upload")
     public void videoUpload(
-            @RequestPart MultipartFile file,
-            @RequestPart VideoForm videoForm,
+            @RequestBody String videoName,
+            @RequestParam MultipartFile file,
             HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         HttpSession session = request.getSession();
@@ -67,7 +68,7 @@ public class VideoController {
             String originalFilename = file.getOriginalFilename();
             int pos = Objects.requireNonNull(originalFilename).lastIndexOf(".");
             String ext = originalFilename.substring(pos + 1);
-            String saveName = videoForm.getName() + "." + ext;
+            String saveName = videoName + "." + ext;
             videoService.saveVideo(saveName, loginMember.getName());
             String fullPath = fileDir + saveName;
             file.transferTo(new File(fullPath));
@@ -76,10 +77,9 @@ public class VideoController {
         response.sendRedirect("/video/list");
     }
 
-    @GetMapping("/video/{id}/download")
+    @GetMapping("/{id}/download")
     public ResponseEntity<Resource> videoDownload(
             @PathVariable Long id,
-            HttpServletRequest request,
             HttpServletResponse response) throws IOException {
 
         Optional<Video> video = videoService.findVideoById(id);
@@ -94,6 +94,21 @@ public class VideoController {
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition)
                 .body(resource);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Resource> videoRender(
+            @PathVariable Long id,
+            HttpServletResponse response
+    ) throws IOException{
+        Optional<Video> video = videoService.findVideoById(id);
+        if (video.isEmpty()){
+            response.sendRedirect("/video/list");
+            return null;
+        }
+        String videoName = video.get().getName();
+        UrlResource resource = new UrlResource("file:" + fileDir + videoName);
+        return ResponseEntity.ok().body(resource);
     }
 
 }
