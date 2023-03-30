@@ -1,4 +1,4 @@
-# movie-edit-application
+# movie-upload-application
 
 This is sample web application to practice REST API
 
